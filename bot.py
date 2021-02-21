@@ -55,48 +55,7 @@ async def on_message(message):
             await message.channel.send(embed=masked_link_embed)
     if message.content.lower() == 'oke':
            await message.channel.send('Oke')
-    
-    #N word filters Line 57 to 93
-    if 'nigger' in message.content.lower():
-            await message.delete()
-            print("n word deleted")
-    if 'nigg3r' in message.content.lower():
-            await message.delete()
-            print("n word deleted")         
-    if 'niger' in message.content.lower():
-            await message.delete()
-            print("n word deleted")   
-    if 'nig3r' in message.content.lower():
-            await message.delete()
-            print("n word deleted")   
-    if 'niggar' in message.content.lower():
-            await message.delete()
-            print("n word deleted")   
-    if 'nigar' in message.content.lower():
-            await message.delete()
-            print("n word deleted")   
-    if 'nigga' in message.content.lower():
-            await message.delete()
-            print("n word deleted")
-    if 'niga' in message.content.lower():
-            await message.delete()
-            print("n word deleted")   
-    if 'n1gg3r' in message.content.lower():
-            await message.delete()
-            print("n word deleted")   
-    if 'n1gga' in message.content.lower():
-            await message.delete()
-            print("n word deleted")   
-    if 'n1gg3r' in message.content.lower():
-            await message.delete()
-            print("n word deleted")   
-    if 'n1ga' in message.content.lower():
-            await message.delete()
-            print("n word deleted")
-
-
-            
-            
+     
 
 
 client.run('#insert your own token here')
