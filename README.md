@@ -18,7 +18,7 @@ How to run
   - Assign it Bot in the first menu
   - For the best result, Admin in the 2nd menu
 
-* Coming Soon™ *
+Coming Soon™
 - Multitreading
 - More jokes
 
