@@ -19,7 +19,6 @@ How to run
   - For the best result, Admin in the 2nd menu
 
 Coming Soon™
-- Multitreading
 - More jokes
 
 
