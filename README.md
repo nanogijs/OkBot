@@ -1,6 +1,8 @@
 # OkBot
 Discord bot written in Python
-
+You can let my version join your server:
+https://discord.com/api/oauth2/authorize?client_id=808651625823731762&permissions=8&scope=bot
+(Uptime not guaranteed :P)
 - Makes jokes
 - Doesn't moderate chat
 - Designed to have a laugh
