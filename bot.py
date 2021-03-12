@@ -1,5 +1,6 @@
 import discord
 from yahoo_fin import stock_info as si
+import cryptocompare
 client = discord.Client()
 import random
 import time
@@ -29,7 +30,7 @@ async def on_message(message):
     if message.content.lower() == 'ok':
         await message.channel.send('Ok')
         n = random.randint(0, 100)
-        if n <= 4:
+        if n <= 5:
             await message.channel.send('Ok rage mode activated!')
             for x in range(0, 10):
                 await message.channel.send('Ok')
@@ -68,6 +69,15 @@ async def on_message(message):
     color=discord.Colour.teal()
 )
         await message.channel.send(embed=masked_price)
-        
 
-client.run('Insert your token here')
+    if message.content.startswith('#'):
+        crypto = (message.content.upper())
+        crypto = crypto.replace('#',"")
+        masked_crypto = discord.Embed(
+    title="Here is your requested Crypto!",
+    description='Current ' + str(crypto) + ' price is $' + str(cryptocompare.get_price(str(crypto), currency='USD')).replace('{',"").replace('}',"").replace(crypto,"").replace('\'',"").replace('USD',"").replace(':',""),
+    color=discord.Colour.teal()
+)
+        await message.channel.send(embed=masked_crypto)        
+
+client.run('INSERT TOKEN')

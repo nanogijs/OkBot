@@ -8,8 +8,10 @@ Discord bot written in Python
 How to run
 - Make sure you have Python installed 
   - (This bot is written using 3.9)
-- Install the discord module via pip3
+- Install the required modules via pip3
   - pip3 install discord
+  - pip3 install yahoo-fin
+  - pip3 install cryptocompare
 - Insert your own discord bot token
   - Get it via discord developer portal
   - https://discord.com/developers/applications
