@@ -10,11 +10,6 @@ masked_link_embed = discord.Embed(
     description='[He is awesome, just see this!](https://www.youtube.com/watch?v=dQw4w9WgXcQ)',
     color=discord.Colour.teal()
 )
-masked_gme = discord.Embed(
-    title="Can\'t stop, Won\'t stop, Gamestop",
-    description='Current GME price is $' + str(round(si.get_live_price("gme"),2)),
-    color=discord.Colour.teal()
-)
 
 
 @client.event
@@ -57,8 +52,17 @@ async def on_message(message):
     if message.content.lower() == 'yes or no':
         await message.channel.send('Let me start from the beginning, when I was a boy in Bulgaria...')
     if "gamestop" in message.content.lower():
+        masked_gme = discord.Embed(
+    title="Can\'t stop, Won\'t stop, Gamestop",
+    description='Current GME price is $' + str(round(si.get_live_price("gme"),2)),
+    color=discord.Colour.teal())
         await message.channel.send(embed=masked_gme)
     if message.content.lower() == 'gme':
+        masked_gme = discord.Embed(
+    title="Can\'t stop, Won\'t stop, Gamestop",
+    description='Current GME price is $' + str(round(si.get_live_price("gme"),2)),
+    color=discord.Colour.teal()
+)
         await message.channel.send(embed=masked_gme)
     if message.content.startswith('$'):
         stockprice = (message.content.upper())
@@ -76,8 +80,8 @@ async def on_message(message):
         masked_crypto = discord.Embed(
     title="Here is your requested Crypto!",
     description='Current ' + str(crypto) + ' price is $' + str(cryptocompare.get_price(str(crypto), currency='USD')).replace('{',"").replace('}',"").replace(crypto,"").replace('\'',"").replace('USD',"").replace(':',"").strip(),
-    color=discord.Colour.teal()
-)
+    color=discord.Colour.teal())
+        
         await message.channel.send(embed=masked_crypto)        
 
 client.run('INSERT TOKEN')
