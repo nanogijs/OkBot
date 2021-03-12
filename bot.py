@@ -75,7 +75,7 @@ async def on_message(message):
         crypto = crypto.replace('#',"")
         masked_crypto = discord.Embed(
     title="Here is your requested Crypto!",
-    description='Current ' + str(crypto) + ' price is $' + str(cryptocompare.get_price(str(crypto), currency='USD')).replace('{',"").replace('}',"").replace(crypto,"").replace('\'',"").replace('USD',"").replace(':',""),
+    description='Current ' + str(crypto) + ' price is $' + str(cryptocompare.get_price(str(crypto), currency='USD')).replace('{',"").replace('}',"").replace(crypto,"").replace('\'',"").replace('USD',"").replace(':',"").strip(),
     color=discord.Colour.teal()
 )
         await message.channel.send(embed=masked_crypto)        
