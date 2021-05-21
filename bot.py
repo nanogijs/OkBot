@@ -1,15 +1,24 @@
 import discord
+
 from yahoo_fin import stock_info as si
 import cryptocompare
-client = discord.Client()
+from pymongo import MongoClient
 import random
 import time
+#Connect to mongoDB
+cluster = MongoClient('YOUR LINK HERE')
+db = cluster["Discord"]
+collection = db["Discord"]
+
+
+client = discord.Client()
 stockprice = None
+discmessage = None
+
 masked_link_embed = discord.Embed(
     title="Heared you guys talking about my friend Rick",
     description='[He is awesome, just see this!](https://www.youtube.com/watch?v=dQw4w9WgXcQ)',
-    color=discord.Colour.teal()
-)
+    color=discord.Colour.teal())
 
 
 @client.event
@@ -19,6 +28,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    global discmessage
+    discmessage = message
     if message.author == client.user:
         return
 
@@ -52,36 +63,37 @@ async def on_message(message):
     if message.content.lower() == 'yes or no':
         await message.channel.send('Let me start from the beginning, when I was a boy in Bulgaria...')
     if "gamestop" in message.content.lower():
-        masked_gme = discord.Embed(
+        return await sendgme()
+    if message.content.lower() == 'gme':
+        return await sendgme()
+    if message.content.startswith('$'):
+        return await requeststock()
+    if message.content.startswith('#'):
+        return await sendcrypto()
+
+async def sendgme():
+    masked_gme = discord.Embed(
     title="Can\'t stop, Won\'t stop, Gamestop",
     description='Current GME price is $' + str(round(si.get_live_price("gme"),2)),
     color=discord.Colour.teal())
-        await message.channel.send(embed=masked_gme)
-    if message.content.lower() == 'gme':
-        masked_gme = discord.Embed(
-    title="Can\'t stop, Won\'t stop, Gamestop",
-    description='Current GME price is $' + str(round(si.get_live_price("gme"),2)),
-    color=discord.Colour.teal()
-)
-        await message.channel.send(embed=masked_gme)
-    if message.content.startswith('$'):
-        stockprice = (message.content.upper())
-        stockprice = stockprice.replace('$',"")
-        masked_price = discord.Embed(
+    await discmessage.channel.send(embed=masked_gme)
+
+async def requeststock():
+    stockprice = (discmessage.content.upper())
+    stockprice = stockprice.replace('$',"")
+    masked_price = discord.Embed(
     title="Here is your requested stock!",
     description='Current ' + stockprice + ' price is $' + str(round(si.get_live_price(str(stockprice)),2)),
-    color=discord.Colour.teal()
-)
-        await message.channel.send(embed=masked_price)
+    color=discord.Colour.teal())
+    await discmessage.channel.send(embed=masked_price)
 
-    if message.content.startswith('#'):
-        crypto = (message.content.upper())
-        crypto = crypto.replace('#',"")
-        masked_crypto = discord.Embed(
+async def sendcrypto():
+    crypto = (discmessage.content.upper())
+    crypto = crypto.replace('#',"")
+    masked_crypto = discord.Embed(
     title="Here is your requested Crypto!",
     description='Current ' + str(crypto) + ' price is $' + str(cryptocompare.get_price(str(crypto), currency='USD')).replace('{',"").replace('}',"").replace(crypto,"").replace('\'',"").replace('USD',"").replace(':',"").strip(),
     color=discord.Colour.teal())
-        
-        await message.channel.send(embed=masked_crypto)        
+    await discmessage.channel.send(embed=masked_crypto)        
 
 client.run('INSERT TOKEN')
