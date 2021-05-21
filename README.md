@@ -14,6 +14,7 @@ How to run
   - pip3 install discord
   - pip3 install yahoo-fin
   - pip3 install cryptocompare
+  - pip3 install mongodb
 - Insert your own discord bot token
   - Get it via discord developer portal
   - https://discord.com/developers/applications
